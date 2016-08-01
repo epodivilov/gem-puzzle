@@ -25,6 +25,7 @@
     "extract-text-webpack-plugin": "1.0.1",
     "html-webpack-plugin": "2.22.0",
     "npm-install-webpack-plugin": "4.0.4",
+    "postcss-loader": "0.9.1",
     "style-loader": "0.13.1",
     "stylus": "0.54.5",
     "stylus-loader": "2.1.2",

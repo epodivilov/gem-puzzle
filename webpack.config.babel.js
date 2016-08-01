@@ -69,7 +69,7 @@ if (isProd) {
         {
             test: /\.styl$/,
             include: [ path.resolve(__dirname, 'src') ],
-            loader:    ExtractTextPlugin.extract('stylus', 'css-loader!stylus-loader')
+            loader:    ExtractTextPlugin.extract('stylus', 'css-loader!postcss-loader!stylus-loader')
         }
     )
 } else {
@@ -77,7 +77,7 @@ if (isProd) {
         {
             test: /\.styl$/,
             include: [ path.resolve(__dirname, 'src') ],
-            loader: 'style-loader!css-loader!stylus-loader'
+            loader: 'style-loader!css-loader!postcss-loader!stylus-loader'
         }
     )
 }
