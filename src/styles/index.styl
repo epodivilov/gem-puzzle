@@ -32,9 +32,13 @@ body
   font-size 36pt
   user-select none
   cursor default
+  transition-property left, top
+  transition-duration 0.1s
+  transition-timing-function ease-out
 
 .tileBtn
   @extend .tile
+  background-color rgba(0, 225, 0, 0.51)
   box-sizing border-box
   font-size 14pt
   text-align center
@@ -45,11 +49,11 @@ body
     background-color #9b9b9b
 
 .annotation
-  margin: 25px auto
-  width: 435px
-  clear: both
+  margin 25px auto
+  width 435px
+  clear both
   overflow hidden
-  color: #707070
+  color #707070
   & > h1
     margin 0
     font-size 38pt
@@ -73,34 +77,34 @@ body
   margin 25px auto 0
   width 435px
   & > div
-    display: inline-block
-    width: 60px
-    height: 40px
-    line-height: 20px
-    text-align: center
-    padding: 5px
-    border: 5px solid #707070
-    background: #a4a4a4
-    border-radius: 10px
-    color: white
-    margin-right: 5px
+    display inline-block
+    width 60px
+    height 40px
+    line-height 20px
+    text-align center
+    padding 5px
+    border 5px solid #707070
+    background #a4a4a4
+    border-radius 10px
+    color white
+    margin-right 5px
     & > span
-      display: block
+      display block
 
 
 .topbar > button {
-  margin-left: auto
-  border: 5px solid #707070
-  background: #a4a4a4
-  border-radius: 10px
-  width: 110px
-  height: 60px
-  color: white
-  font-weight: bold
+  margin-left auto
+  border 5px solid #707070
+  background #a4a4a4
+  border-radius 10px
+  width 110px
+  height 60px
+  color white
+  font-weight bold
 }
 .topbar > button:focus {
-  outline: none
+  outline none
 }
 .topbar > button:active {
-  background-color: #707070
+  background-color #707070
 }

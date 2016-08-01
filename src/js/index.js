@@ -1,5 +1,5 @@
 import '../styles/index.styl'
-import Game from './Game'
+import Game from './Game/Game'
 
 window.onload = function () {
 
