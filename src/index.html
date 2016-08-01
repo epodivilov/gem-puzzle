@@ -3,8 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>The gem puzzle</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
+    <div class="annotation">
+        <h1>The gem puzzle</h1>
+        <p>Created by <a href="https://github.com/epodivilov">Podivilov Evgeniy</a></p><br>
+        <p>Source on <a href="https://github.com/epodivilov/2048">GitHub</a></p>
+    </div>
+    <div class="topbar">
+        <div>STEPS <span id="currentsteps"></span></div>
+        <button id="reset">RESET</button>
+    </div>
+    <div id="playfield">
+        <div class="back" style="top: 0px; left: 0px;"></div>
+        <div class="back" style="top: 105px; left: 0px;"></div>
+        <div class="back" style="top: 210px; left: 0px;"></div>
+        <div class="back" style="top: 315px; left: 0px;"></div>
+        <div class="back" style="top: 0px; left: 105px;"></div>
+        <div class="back" style="top: 105px; left: 105px;"></div>
+        <div class="back" style="top: 210px; left: 105px;"></div>
+        <div class="back" style="top: 315px; left: 105px;"></div>
+        <div class="back" style="top: 0px; left: 210px;"></div>
+        <div class="back" style="top: 105px; left: 210px;"></div>
+        <div class="back" style="top: 210px; left: 210px;"></div>
+        <div class="back" style="top: 315px; left: 210px;"></div>
+        <div class="back" style="top: 0px; left: 315px;"></div>
+        <div class="back" style="top: 105px; left: 315px;"></div>
+        <div class="back" style="top: 210px; left: 315px;"></div>
+        <div class="back" style="top: 315px; left: 315px;"></div>
+    </div>
 </body>
 </html>
