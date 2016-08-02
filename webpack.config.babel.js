@@ -72,6 +72,7 @@ if (isProd) {
             loader:    ExtractTextPlugin.extract('stylus', 'css-loader!postcss-loader!stylus-loader')
         }
     )
+    config.entry = ['./src/js/index']
 } else {
     config.module.loaders.push(
         {
