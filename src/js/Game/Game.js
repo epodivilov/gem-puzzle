@@ -9,6 +9,58 @@ export default class Game {
         this.count = 0;
     }
 
+    initialize() {
+        this.clearFields();
+
+        let combination = this.randomCombination()
+
+        while (!this.checkPossibleSolution(combination)) {
+            combination = this.randomCombination()
+        }
+
+        for (let row = 0; row < 4; row++) {
+            this.tiles.push([]);
+            for (let col = 0; col < 4; col++) {
+                let lbl = combination.shift()
+
+                if (lbl === 0) {
+                    this.tiles[row].push(new TileBtn('Press to start', (e) => {
+                        e.stopPropagation();
+                        this.field.removeChild(this.tiles[row][col].el)
+                        this.tiles[row][col] = undefined;
+                        this.field.onclick = this.onFieldClick.bind(this);
+                    }))
+                } else {
+                    this.tiles[row].push(new Tile(lbl))
+                }
+
+            }
+        }
+
+        for (let row = 0; row < 4; row++) {
+            this.tiles.push([]);
+            for (let col = 0; col < 4; col++) {
+                this.field.appendChild(this.tiles[row][col].el)
+            }
+        }
+
+        this.count = 0;
+        this.gameOver.style.zIndex = '-1';
+        this.field.onclick = undefined;
+
+        this.render()
+    }
+
+    onFieldClick() {
+        for (let row = 0; row < 4; row++) {
+            for (let col = 0; col < 4; col++) {
+                if (this.tiles[row][col] && event.target === this.tiles[row][col].el) {
+                    return this.moveTile(row, col);
+                }
+            }
+        }
+    }
+
     checkPossibleSolution(arr) {
         let sum = 0;
         for (let i = 0, len = arr.length; i < len; i++) {
@@ -39,64 +91,14 @@ export default class Game {
 
         return sourceArr;
     }
-    
-    initialize() {
-        this.clear();
 
-        let combination = this.randomCombination()
-
-        while (!this.checkPossibleSolution(combination)) {
-            combination = this.randomCombination()
-        }
-
-        for (let row = 0; row < 4; row++) {
-            this.tiles.push([]);
-            for (let col = 0; col < 4; col++) {
-                let lbl = combination.shift()
-
-                if (lbl === 0) {
-                    this.tiles[row].push(new TileBtn('Press to start', (e) => {
-                        e.stopPropagation();
-                        this.field.removeChild(this.tiles[row][col].el)
-                        this.tiles[row][col] = undefined;
-                        this.field.onclick = () => {
-                            for (let row = 0; row < 4; row++) {
-                                for (let col = 0; col < 4; col++) {
-                                    if (this.tiles[row][col] && event.target === this.tiles[row][col].el) {
-                                        return this.moveTile(row, col);
-                                    }
-                                }
-                            }
-                        };
-                    }))
-                } else {
-                    this.tiles[row].push(new Tile(lbl))
-
-                }
-
-            }
-        }
-
-        for (let row = 0; row < 4; row++) {
-            this.tiles.push([]);
-            for (let col = 0; col < 4; col++) {
-                this.field.appendChild(this.tiles[row][col].el)
-            }
-        }
-
-        this.render()
-    }
-
-    clear() {
+    clearFields() {
         this.tiles.forEach((row) => {
             row.forEach((column) => {
                 if (column) this.field.removeChild(column.el)
             })
         })
         this.tiles = [];
-        this.count = 0;
-        this.gameOver.style.zIndex = '-1';
-        this.field.onclick = undefined;
     }
 
     render() {
@@ -109,35 +111,30 @@ export default class Game {
     }
 
     moveTile(dX, dY) {
-        const currentTile = this.tiles[dX][dY];
-
         if(dX + 1 <= 3 && !this.tiles[dX + 1][dY]) {
-            this.tiles[dX + 1][dY] = currentTile;
-            this.tiles[dX][dY] = undefined;
-            this.count++;
+            this.moveFromTo(dX, dY, dX + 1, dY)
         }
         if (dX - 1 >= 0 && !this.tiles[dX - 1][dY]) {
-            this.tiles[dX - 1][dY] = currentTile;
-            this.tiles[dX][dY] = undefined;
-            this.count++;
+            this.moveFromTo(dX, dY, dX - 1, dY)
         }
         if(dY + 1 <= 3 && !this.tiles[dX][dY + 1]) {
-            this.tiles[dX][dY + 1] = currentTile;
-            this.tiles[dX][dY] = undefined;
-            this.count++;
+            this.moveFromTo(dX, dY, dX, dY + 1)
         }
         if (dY - 1 >= 0 && !this.tiles[dX][dY - 1]) {
-            this.tiles[dX][dY - 1] = currentTile;
-            this.tiles[dX][dY] = undefined;
-            this.count++;
+            this.moveFromTo(dX, dY, dX, dY - 1)
         }
         
         if (this.isGameOver()) {
             this.gameOver.style.zIndex = '100';
         }
 
-
         this.render()
+    }
+
+    moveFromTo(X, Y, dX, dY) {
+        this.tiles[dX][dY] = this.tiles[X][Y];
+        this.tiles[X][Y] = undefined;
+        this.count++;
     }
 
     isGameOver() {
