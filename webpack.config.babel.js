@@ -17,7 +17,7 @@ const config = {
     output: {
         path: path.join(__dirname, 'build', 'assets'),
         filename: 'bundle.js',
-        publicPath: '/assets/'
+        publicPath: 'assets/'
     },
     module: {
         preLoaders: [
